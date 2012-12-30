@@ -85,4 +85,10 @@ $params = array("nom" => "kokolitolithe", "prenom" => "valeur","nom_de_colone" =
 $user = new Model_User();
 $user->setFromArray($params);
 $newId = $user->save(); //Fait un insert et renvoie l'id de l'user courant.
+
 $user->save("prenom" => "Moufasa"); // fait un update de l'user courant avec pour nouveau prenom : "Moufasa"
+
+$user->find(1); //recherche l'id 1 et y fait un select
+//OR 
+$user->findBy(array("id" => 1)); // biensur cette methode reçoit autant de colone comme filtre que vous le souhaitez.
+
