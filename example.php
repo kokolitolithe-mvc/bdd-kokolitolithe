@@ -7,6 +7,8 @@
  */
 
 require "DataBase.php";
+require "Model.php";
+
 $kokolitolithe = DataBase::instance(); // methode pour récuperer le Singleton.
 
 $config["mysql"] = array(
@@ -65,3 +67,22 @@ echo "</pre>";
 **/
 
 echo $kokolitolithe->getErrorMessage();
+
+/**
+* Model_User
+* @autors Moufasa
+ * Exemple de model dans le framework Kokolitolithe
+*/
+
+class Model_User extends Model
+{
+	protected $table = "user"; //préciser le nom de la table en base.
+	protected $timestampable = true; // préciser si le champs created_at et updated_at doivent être remplis.
+	protected $primary = array('id'); // préciser la ou les clés primaires.
+}
+
+$params = array("nom" => "kokolitolithe", "prenom" => "valeur","nom_de_colone" => "valeur_a_entrer");
+$user = new Model_User();
+$user->setFromArray($params);
+$newId = $user->save(); //Fait un insert et renvoie l'id de l'user courant.
+$user->save("prenom" => "Moufasa"); // fait un update de l'user courant avec pour nouveau prenom : "Moufasa"
